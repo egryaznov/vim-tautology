@@ -47,6 +47,12 @@ if exists('g:tautology_mappings')
     endif
 endif
 
+if exists('g:tautology_min_length')
+    let s:min_length = get(g:, 'tautology_min_length')
+else
+    let s:min_length = 4
+endif
+
 function! s:register_commands()
     command! -range -nargs=0 TautologyMark call s:tautology_mark()
     command! -range -nargs=0 TautologyClear call s:tautology_clear()
@@ -57,7 +63,7 @@ function! s:tautology_clear()
 endfunction
 
 function! s:tautology_mark()
-    execute "'<,'>!python3" s:path . "/plugin/tautology.py" "--mark" s:stain "--window" string(s:window) "--skip" string(s:skip) "--ban-list" join(s:stop_words, ' ')
+    execute "'<,'>!python3" s:path . "/plugin/tautology.py" "--min-length" string(s:min_length) "--mark" s:stain "--window" string(s:window) "--skip" string(s:skip) "--ban-list" join(s:stop_words, ' ')
 endfunction
 
 call s:register_commands()

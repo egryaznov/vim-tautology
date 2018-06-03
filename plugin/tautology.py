@@ -7,6 +7,7 @@ import argparse # we use only ArgumentParser class from this module
 DEFAULT_MARK        = '@'
 DEFAULT_WINDOW_SIZE = 30
 SKIP_DEFAULT        = 0
+MIN_LENGTH_DEFAULT  = 4
 BAN_DEFAULT         = ['I', 'the', 'a', 'an', 'to', 'be', 'of', 'and', 'in', 'that', 'this', 'as']
 # End of global constants definitions
 
@@ -47,21 +48,26 @@ def mark(words, index, stain):
         words[index] = stain + words[index]
 
 
-def detect_tautologies(words, stain=DEFAULT_MARK, window=DEFAULT_WINDOW_SIZE, skip=SKIP_DEFAULT, ban_list=BAN_DEFAULT):
+def detect_tautologies(words, stain=DEFAULT_MARK, window=DEFAULT_WINDOW_SIZE, skip=SKIP_DEFAULT, ban_list=BAN_DEFAULT,
+        min_length=MIN_LENGTH_DEFAULT):
     """ Marks all tautologies in `words` with `stain`. The option `window` specifies the size of a 'tautology window', e.g. how many
         words backwards are examined when searching for similar words."""
     if len(words) == 1:
         return
     #
     for i in range(1, len(words)):
-        # We don't process words that are in stop list
         pruned_next_word = prune(words[i])
+        # We don't process words that are below the minimum length
+        if len(pruned_next_word) < min_length:
+            continue
+        # We don't process words that are in stop list
         if pruned_next_word in ban_list:
             continue
         # Gather all indices of words that are considered to be tautologies of the current `pruned_next_word`
         window_start = max(i - window, 0)
         window_end   = max(0, i - skip)
         tautology_indices = [j for j in range(window_start, window_end) if tautology(words[j], pruned_next_word, second_pruned=True)]
+        # Mark every found tautology and the current word itself
         if not empty(tautology_indices):
             mark(words, i, stain)
             for index in tautology_indices:
@@ -89,7 +95,7 @@ def clean_marks(words, mark=DEFAULT_MARK):
             words[i] = words[i][1:]
 
 
-# python3 script.py -m # -w 10 -u --skip (-s) 3 --banlist (-b) this is text
+# python3 script.py -m # -w 10 -u --skip (-s) 3 --banlist (-b) this is text --min-length 4
 parser = argparse.ArgumentParser(description='Mark tautologies in a text')
 parser.add_argument('-m', '--mark', default=DEFAULT_MARK, help='The mark that will be used as a prefix in tautologies.', metavar='mark')
 parser.add_argument('-s', '--skip', default=SKIP_DEFAULT, help='How many words to skip backwards', metavar='skip', type=int)
@@ -97,6 +103,8 @@ parser.add_argument('-w', '--window', default=DEFAULT_WINDOW_SIZE, help='Size of
 parser.add_argument('-b', '--ban-list', default=BAN_DEFAULT, help='List of stop-words that will be skipped', metavar='stop words',
         nargs='+')
 parser.add_argument('-u', '--undo', help='Clear all marks from text', action='store_true')
+parser.add_argument('-l', '--min-length', default=MIN_LENGTH_DEFAULT, help='Skip words below this minimum length', type=int,
+        metavar='minimum length')
 args = parser.parse_args()
 # Get selected text from stdin
 words = []
@@ -108,7 +116,7 @@ if args.undo:
     clean_marks(words, mark=args.mark)
 else:
     # User chose to detect and mark tautologies
-    detect_tautologies(words, stain=args.mark, window=args.window, skip=args.skip, ban_list=args.ban_list)
+    detect_tautologies(words, stain=args.mark, window=args.window, skip=args.skip, ban_list=args.ban_list, min_length=args.min_length)
 # Now, when we have processed list of `words`,
 # We can print them line by line
 echo(words)

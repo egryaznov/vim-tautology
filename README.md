@@ -49,9 +49,10 @@ There are 5 main variables that let you control the behaviour of this plugin:
 1. `g:tautology_mark`. The string that will be used as a prefix to recurring words. Default value is `@`.
 2. `g:tautology_stop_words`. The list of words that are too ubiquitous to consider, like "and", "the", "as" and so on. The words in this list
    will be omitted when marking tautologies. Default is `['I', 'the', 'a', 'an', 'to', 'be', 'of', 'and', 'in', 'that', 'this',
-   'as']`.
+   'as']`, but now it cannot be appended, only redefined.
 3. `g:tautology_window_size`. Controls how many words behind the examined word is compared with. Default is `30`.
 4. `g:tautology_skip`. Controls how many words directly before the examined word is skipped to prevent overabundance of marks.
+5. `g:tautology_min_length`. Skip words which are below this length. Useful to avoid marks clumping. Default is `4`.
 
 Last two variables define the so-called **window** of tautologies. For example, suppose `window_size = 6`, `tautology_skip = 2` and current
 word is `dog`, then the window in the following text will be:
