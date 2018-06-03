@@ -32,28 +32,12 @@ about my @place. I didn't answer because I @was late for school.**
 4. When you done, simply `gv` and run `:TautologyClear`, this will remove all marks that are still left.
 
 
-MAPPINGS                                        *lion-mappings*
+MAPPINGS                                        *vim-tautology-mappings*
 
                                                 *gz* *TautologyMark*
                                                 *gZ* *TautologyClear*
 Of course, typing all these commands is laborious, so you can set `g:tautology_mappings = 1` to use `gz` as `:TautologyMark` and `gZ` as
 `:TautologyClear`. Please note that these mappings work only in **visual mode.**
-
-EXAMPLES                                        *lion-examples*
-
-In the below examples, an asterisk (*) denotes the position of cursor. This
-is primarily to help understand {motion}s from the example commands.
-
-  Old text                  Command     New text ~
-
-  $name = "Tom";            glip=       $name     = "Tom";
-  $birthday =* "Jan 12";                $birthday = "Jan 12";
-  $age = 25;                            $age      = 25;
-
-  fish, monkey, giraffe*    2gL3j,      fish,    monkey,   giraffe
-  a, b, c                               a,       b,        c
-  45, saturday, 0                       45,      saturday, 0
-  goodbye, cruel, lamp                  goodbye, cruel,    lamp
 
 CONFIGURATION                                   *vim-tautology-configuration*
 
@@ -70,7 +54,7 @@ word is `dog`, then the window in the following text will be:
 
 The quick [brown fox jumps over] the lazy dog.
 
-ISSUES                                 *vim-tautology-issues* *lion-todo*
+ISSUES                                 *vim-tautology-issues* *vim-tautology-todo*
 
 Currently a sharp symbol `#` cannot be set as a mark, because Vim treats it as a name of *alternate file* (see `:h alternate-file`).
 Avoid it and use `@` instead. This problem may be fixed soon.

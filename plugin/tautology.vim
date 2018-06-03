@@ -1,3 +1,19 @@
+if !has("python3")
+    echohl WarningMsg
+    echom  "vim-tautology requires the command 'python3' to be available on your system"
+    echohl None
+    finish
+endif
+
+if !exists('g:tautology_dir')
+    echohl WarningMsg
+    echom  "vim-tautology requires the variable `g:tautology_dir` to be set"
+    echohl None
+    finish
+endif
+
+let s:path = get(g:, 'tautology_dir')
+
 if exists('g:tautology_mark')
     let s:stain = get(g:, 'tautology_mark')
     " Avoid using # as a mark, this causes problems.
@@ -34,19 +50,17 @@ if exists('g:tautology_mappings')
     endif
 endif
 
-let s:path = expand("%:p:h")
-
 function! s:register_commands()
     command! -range -nargs=0 TautologyMark call s:tautology_mark()
     command! -range -nargs=0 TautologyClear call s:tautology_clear()
 endfunction
 
 function! s:tautology_clear()
-    execute "'<,'>!python3" s:path . "/tautology.py --undo" "--mark" s:stain
+    execute "'<,'>!python3" s:path . "/plugin/tautology.py --undo" "--mark" s:stain
 endfunction
 
 function! s:tautology_mark()
-    execute "'<,'>!python3" s:path . "/tautology.py" "--mark" s:stain "--window" string(s:window) "--skip" string(s:skip) "--ban-list" join(s:stop_words, ' ')
+    execute "'<,'>!python3" s:path . "/plugin/tautology.py" "--mark" s:stain "--window" string(s:window) "--skip" string(s:skip) "--ban-list" join(s:stop_words, ' ')
 endfunction
 
 call s:register_commands()
