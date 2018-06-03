@@ -18,11 +18,13 @@ The plugin marks all tautologies in a given piece of text by prefixing them with
 There are two pre-defined commands `TautologyMark` and `TautologyClear`. The former marks all tautologies in selected text, and
 latter removes all inserted marks. Step-by-step usage:
 
-0. Set the variable `g:tautology_dir` to the directory of the file `vim-tautology.vim` to ensure that the python script will work. Default is `~/.vim/plugged/vim-tautology`.
+0. Set the variable `g:tautology_dir` to the path to directory of this plugin. Default is `~/.vim/plugged/vim-tautology`.
 1. Select the text you want to snoop for tautologies, for example with `vip`:
 2. Run `:TautologyMark`
+
 **I @was in school @today. School is still the same @old, dull @place that it always @was. @Today an @old man came to me and asked
 about my @place. I didn't answer because I @was late for school.**
+
 3. Circle through with `/@\w*`, edit, remove or replace them with synonyms, etc...
 4. When you done, simply `gv` and run `:TautologyClear`, this will remove all marks that are still left.
 
@@ -35,13 +37,15 @@ following in your `.vimrc`:
 You will need the last version of Vim and the third version of python interpreter to run the plugin. Make sure the command `python3` is
 available on your system.
 
-**IMPORTANT**
+**!IMPORTANT!**
+
 Manually set the path to the directory of this plugin by assigning it to the variable `g:tautology_dir`. For example, default is:
 `let g:tautology_dir = ~/.vim/plugged/vim-tautology/`. Change it if you either of Windows or not using vim-plug.
 
 
 ## Configuration
-There are 4 main variables that let you control the behaviour of this plugin:
+There are 5 main variables that let you control the behaviour of this plugin:
+0. `g:tautology_dir`. Path to the directory of this plugin. Please set this variable manually to ensure the correct workings of the plugin. Default is `~/.vim/plugged/vim-tautology`.
 1. `g:tautology_mark`. The string that will be used as a prefix to recurring words. Default value is `@`.
 2. `g:tautology_stop_words`. The list of words that are too ubiquitous to consider, like "and", "the", "as" and so on. The words in this list
    will be omitted when marking tautologies. Default is `['I', 'the', 'a', 'an', 'to', 'be', 'of', 'and', 'in', 'that', 'this',
