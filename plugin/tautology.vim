@@ -42,7 +42,8 @@ endif
 if exists('g:tautology_mappings')
     let s:mappings = get(g:, 'tautology_mappings')
     if s:mappings == 1
-        vnoremap gz :TautologyMark<CR>
+        execute "vnoremap gz :TautologyMark<CR>/" . s:stain . "\\S*<CR>"
+        " vnoremap gz :TautologyMark<CR>
         vnoremap gZ :TautologyClear<CR>
     endif
 endif
