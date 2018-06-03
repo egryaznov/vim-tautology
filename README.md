@@ -51,10 +51,10 @@ There are 6 main variables that let you control the behaviour of this plugin:
 3. `g:tautology_stop_words`. The list of words that are too ubiquitous to consider, like "and", "the", "as" and so on. The words in this list
    will be omitted when marking tautologies. Default is `['I', 'the', 'a', 'an', 'to', 'be', 'of', 'and', 'in', 'that', 'this',
    'as']`, but now it cannot be appended, only redefined.
-4. `g:tautology_window_size`. Controls how many words behind the examined word is compared with. Default is `30`.
-5. `g:tautology_skip`. Controls how many words directly before the examined word is skipped to prevent overabundance of marks.
-6. `g:tautology_min_length`. Skip words which are below this length. Useful to avoid marks clumping. Default is `4`. It's not
+4. `g:tautology_min_length`. Skip words which are below this length. Useful to avoid marks clumping. Default is `4`. It's not
    advisable to set it below 1.
+5. `g:tautology_window_size`. Controls how many words behind the examined word is compared with. Default is `30`.
+6. `g:tautology_skip`. Controls how many words directly before the examined word is skipped to prevent overabundance of marks.
 
 Last two variables define the so-called **window** of tautologies. For example, suppose `window_size = 6`, `tautology_skip = 2` and current
 word is `dog`, then the window in the following text will be:
@@ -69,3 +69,5 @@ Of course, typing all these commands is laborious, so you can set `g:tautology_m
 ## Issues
 Currently a sharp symbol `#` cannot be set as a mark, because Vim treats it as a name of *alternate file* (see `:h alternate-file`).
 Avoid it and use `@` instead. This problem may be fixed soon.
+
+The global variable `g:tautology_stop_words` cannot be appended with `+=`, only redefined.
