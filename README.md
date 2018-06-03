@@ -1,6 +1,8 @@
 This repository contains sources for a vim plugin that detects and marks recurring words in your text.
 
-### Description
+---
+
+## Description
 If you like me then you often repeat yourself when writing a piece of English text. The same word can occur multiple times in the same
 paragraph, which makes a reader bored and frustrated. For instance, consider the following passage:
 
@@ -14,7 +16,7 @@ The plugin marks all tautologies in a given piece of text by prefixing them with
 
 ---
 
-### How To Use
+## How To Use
 There are two pre-defined commands `TautologyMark` and `TautologyClear`. The former marks all tautologies in selected text, and
 latter removes all inserted marks. Step-by-step usage:
 
@@ -26,7 +28,7 @@ about my @place. I didn't answer because I @was late for school.**
 4. When you done, simply `gv` and run `:TautologyClear`, this will remove all marks that are still left.
 
 ---
-### Installation and Prerequisites
+## Installation and Prerequisites
 Install via your favorite vim plugin manager. I suggest using [vim-plug](https://github.com/junegunn/vim-plug), just place the
 following in your `.vimrc`:
 
@@ -37,7 +39,7 @@ available on your system.
 
 ---
 
-### Configuration
+## Configuration
 There are 4 main variables that let you control the behaviour of this plugin:
 1. `g:tautology_mark`. The string that will be used as a prefix to recurring words. Default value is `@`.
 2. `g:tautology_stop_words`. The list of words that are too ubiquitous to consider, like "and", "the", "as" and so on. The words in this list
@@ -53,11 +55,11 @@ The quick **[brown fox jumps over]** the lazy dog.
 
 ---
 
-### Mappings
+## Mappings
 Of course, typing all these commands is laborious, so you can set `g:tautology_mappings = 1` to use `gz` as `:TautologyMark` and `gZ` as
 `:TautologyClear`. Please note that these mappings work only in **visual mode.**
 
 ---
-### Issues
+## Issues
 Currently a sharp symbol `#` cannot be set as a mark, because Vim treats it as a name of *alternate file* (see `:h alternate-file`).
 Avoid it and use `@` instead. This problem may be fixed soon.
