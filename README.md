@@ -12,6 +12,8 @@ Notice that the words "school", "old", "today", "place" are redundant and must b
 Such pesky recurring words can be hard to trace, so I've created this plugin to facilitate the process.
 
 The plugin marks all tautologies in a given piece of text by prefixing them with a specified symbol, '@' by default.
+Watch the demo:
+![Alt Link](https://github.com/egryaznov/vim-tautology/blob/master/example.gif)
 
 
 ## How To Use
