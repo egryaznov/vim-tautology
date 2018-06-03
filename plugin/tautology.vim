@@ -5,14 +5,11 @@ if !has("python3")
     finish
 endif
 
-if !exists('g:tautology_dir')
-    echohl WarningMsg
-    echom  "vim-tautology requires the variable `g:tautology_dir` to be set"
-    echohl None
-    finish
+if exists('g:tautology_dir')
+    let s:path = get(g:, 'tautology_dir')
+else
+    let s:path = '~/.vim/plugged/vim-tautology'
 endif
-
-let s:path = get(g:, 'tautology_dir')
 
 if exists('g:tautology_mark')
     let s:stain = get(g:, 'tautology_mark')
