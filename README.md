@@ -2,7 +2,7 @@ This repository contains sources for a vim plugin that detects and marks recurri
 
 
 ## Description
-If you like me then you often repeat yourself when writing a piece of English text. The same word can occur multiple times in the same
+If you are like me then you often repeat yourself when writing a piece of English text. The same word can occur multiple times in the same
 paragraph, which makes a reader bored and frustrated. For instance, consider the following passage:
 
 I was in school today. School is still the same old, dull place that it always was. Today an old man came to me and asked about my
